@@ -4,7 +4,7 @@
  * @package pages
  */
 import type { NextPage } from 'next';
-import { TodoListTemplate } from '@/components/TodoListTemplate';
+import { TodoListTemplate } from '@/components/templates/TodoListTemplate';
 
 /**
  * TodoListPage

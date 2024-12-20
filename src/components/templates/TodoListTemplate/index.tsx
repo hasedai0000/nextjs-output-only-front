@@ -1,13 +1,12 @@
 import { useTodoContext } from '@/contexts/TodoContext';
-import { BaseLayout } from '../organisms/BaseLayout';
-
+import { BaseLayout } from '@/components/organisms/BaseLayout';
 import styles from './styles.module.css';
 import { useTodoListTemplate } from './useTodoListTemplate';
-import { TodoList } from '../organisms/TodoLlist';
-import { InputForm } from '../atoms/InputForm';
+import { InputForm } from '@/components/atoms/InputForm';
+import { TodoList } from '@/components/organisms/TodoLlist';
 
 export const TodoListTemplate = () => {
-  const { todoList } = useTodoContext();
+  const { todoList, deleteTodo } = useTodoContext();
   const [{ searchKeyword, showTodoList }, { handleChangeSearchKeyword }] = useTodoListTemplate({ todoList });
 
   return (
@@ -17,7 +16,11 @@ export const TodoListTemplate = () => {
           <InputForm inputValue={searchKeyword} placeholder="Search Keyword" onChange={handleChangeSearchKeyword} />
         </div>
         <div className={styles.area}>
-          <TodoList todoList={showTodoList} />
+          {showTodoList.length > 0 ? (
+            <TodoList todoList={showTodoList} handleDeleteTodo={deleteTodo} />
+          ) : (
+            <p className={styles.no_todo}>No Todo</p>
+          )}
         </div>
       </div>
     </BaseLayout>
